@@ -8,18 +8,18 @@ require __DIR__ . '/../modelos/PedidoDetalle.php';
 
 class PedidoControlador {
 
-    // ============================================
-    // LISTAR PEDIDOS
-    // ============================================
+    
+    // enlistar los pedidos
+   
     public function listar(Request $request, Response $response): Response {
         $pedidos = Pedido::all();
 
         return $this->respuesta($response, $pedidos->toArray(), 200);
     }
 
-    // ============================================
-    // DETALLE DE UN PEDIDO
-    // ============================================
+    
+    // detalles de un pedido
+    
     public function detalle(Request $request, Response $response, array $args): Response {
         $id     = $args['id'];
         $pedido = Pedido::find($id);
@@ -38,9 +38,9 @@ class PedidoControlador {
         ], 200);
     }
 
-    // ============================================
-    // CREAR PEDIDO
-    // ============================================
+    
+    // crear el pedido
+    
     public function crear(Request $request, Response $response): Response {
         $datos    = $request->getParsedBody();
         $mesa_id  = $datos['mesa_id']  ?? '';
@@ -87,9 +87,8 @@ class PedidoControlador {
         ], 201);
     }
 
-    // ============================================
-    // CAMBIAR ESTADO DEL PEDIDO
-    // ============================================
+   
+    //cambair el estado del pedido
     public function cambiarEstado(Request $request, Response $response, array $args): Response {
         $id     = $args['id'];
         $datos  = $request->getParsedBody();
@@ -118,9 +117,9 @@ class PedidoControlador {
         ], 200);
     }
 
-    // ============================================
-    // HELPER — respuesta JSON
-    // ============================================
+   
+    //respuesta de json
+    
     private function respuesta(Response $response, array $datos, int $codigo): Response {
         $response->getBody()->write(json_encode($datos));
         return $response
